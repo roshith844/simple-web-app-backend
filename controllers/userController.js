@@ -7,16 +7,16 @@ const User = require("../models/userSchema");
 
 module.exports = {
     signup:(req,res)=>{
-        const { errors, isValid } = validateRegisterInput(req.body);
-        if (!isValid) {
-          return res.status(400).json(errors);
-        }
+        // const { errors, isValid } = validateRegisterInput(req.body);
+        // if (!isValid) {
+        //   return res.status(400).json(errors);
+        // }
 
         User.findOne({
             email : req.body.email
         }).then((user)=>{
             if(user){
-              res.status(400).json({email:"email already exist"});
+              res.status(400).json({ email:"email already exist"});
             }else{
                 bcrypt.hash(req.body.password, 10,(err,hash)=>{
                     const password = hash;
@@ -35,9 +35,9 @@ module.exports = {
     login:(req,res)=>{
         const {errors, isValid} = validateLoginInput(req.body);
 
-        if(!isValid){
-            return res.status(400).json(errors)
-        }
+        // if(!isValid){
+        //     return res.status(400).json(errors)
+        // }
         const email = req.body.email;
         const password = req.body.password;
         User.findOne({email}).then(user=>{

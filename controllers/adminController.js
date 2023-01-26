@@ -9,10 +9,11 @@ dotenv.config();
 
 module.exports = {
   login: (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    console.log(req.body)
+    // const { errors, isValid } = validateLoginInput(req.body);
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
     const email = req.body.email;
     const password = req.body.password;
     if (
@@ -53,10 +54,10 @@ module.exports = {
     });
   },
   addUser: (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // const { errors, isValid } = validateRegisterInput(req.body);
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
     User.findOne({
       email: req.body.email,
@@ -86,10 +87,10 @@ module.exports = {
   postEditUser:(req,res)=>{
     console.log(req.params.id);
     console.log(req.body);
-    const { errors, isValid } = validateEditUser(req.body);
-     if (!isValid) {
-       return res.status(400).json(errors);
-     }
+    // const { errors, isValid } = validateEditUser(req.body);
+    //  if (!isValid) {
+    //    return res.status(400).json(errors);
+    //  }
 
      User.updateOne({_id:req.params.id},{$set:{name:req.body.name,email:req.body.email}}).then((result)=>{
         res.json({status:true});
